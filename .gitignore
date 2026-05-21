@@ -1,0 +1,4 @@
+.env
+alertmanager/alertmanager.yml
+app/node_modules/
+prometheus/.env.example

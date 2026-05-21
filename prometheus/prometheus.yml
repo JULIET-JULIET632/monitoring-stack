@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 15s      # pull metrics every 15 seconds
+  evaluation_interval: 15s  # evaluate alert rules every 15 seconds
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']
+
+rule_files:
+  - "alert.rules.yml"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node-exporter'        # system metrics (CPU, memory, disk)
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  - job_name: 'nodejs-api'           # our app's custom metrics
+    static_configs:
+      - targets: ['app:3001']
